@@ -1,0 +1,64 @@
+
+\section{Inductive representation}
+\label{sec:inductive}
+
+
+\subsection{$\evalcitdbe{q}$}
+
+\subsubsection{Definition}
+\label{sec:evalbe_def}
+
+\subsubsection{Correctness}
+\label{sec:evalbe_correct}
+
+\para{$\path_1/\path_2$}
+Let $\u_1 = \tup{o_1, o_2, \tau_1, \delta_1}$ and $\u_2 = \tup{o_3, o_4, \tau_2, \delta_2}$,
+with $o_2 = o_3$.
+
+And let  $\u_1 \tjoin \u_2 = \tup{o_1, o_4, \tau'_1, \delta_1 + \delta_2, b,e}$,
+with
+\begin{align*}
+\tau'_1 &=  (((\tau_1 + \delta_1) \cap \tau_2) \ominus \delta_1) \cap \tau_1\\
+  b &= \max(b_1, b_2 - b_{\delta_1})\\
+  e &= \min(e_1, e_2 - e_{\delta_1})
+\end{align*}
+
+
+
+For each $i \in \{1,2\}$ and $t \in \tau_i$,
+we use $\delta_i(t)$ for the interval
+\[\ld{\delta_{i}}\ b_{\delta_i} + \max(0, b_i - t) \ ,\ e_{\delta_i} - \max(0, t - e_i)\ \rd{\delta_{i}}\]
+And similarly to what we did for $\tuplestd$,
+we use $R_i$ for be the binary relation over $\td$ specified by the time points and distances in $\u_i$,
+i.e.~$R_i = \{(t,t + d) \mid t \in \tau_i, d \in \delta_i(t)\}$.
+
+Then the intervals in the set $\u_1 \tjoin \u_2$ should intuitively represent this relation $R_1 \join R_2$, i.e.
+
+with
+\begin{align*}
+\tau'_1 &=  (((\tau_1 + \delta_1) \cap \tau_2) \ominus \delta_1) \cap \tau_1\\
+  b &= \max(b_1, b_2 - b_{\delta_1})\\
+  e &= \min(e_1, e_2 - e_{\delta_1})
+%   \begin{cases}
+%     b_1 &\te{if} b_2 \le b_1 + b_{\delta_1}\\
+%     b_2 - b_{\delta_1} &\te{otherwise}
+%   \end{cases}
+% &
+ % e =
+ %  \begin{cases}
+ %    e_1 &\te{if} e_1 + e_{\delta_1} \le e_2 \\
+ %    e_2 - e_{\delta_1} &\te{otherwise}
+ %  \end{cases}
+\end{align*}
+
+
+The proof that 
+
+Now let $t \in $
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../appendix"
+%%% End:
