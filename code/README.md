@@ -12,5 +12,5 @@ CREATE TABLE exp_sizes (t TIMESTAMP, query VARCHAR, points bigInt, v1 bigInt, v1
 
 The bash script ```run.sh``` is the main entry point and can be used to run the experiments, with different durations x and domain scaling factors k
 
-The result is a ```out.txt``` file for logging purposes and the output size of the queries is stored in table ```exp_sizes```
+The result is a ```out.txt``` file for logging purposes and the output size of the queries is stored in table ```exp_sizes```, where ```points``` is the result size for using time points, ```v1``` and ```v1_coalesced``` is the result size of U^{[t]} before and after coalescing respectively, and ```v2``` and ```v2_coalesced``` is the result size of U^{[d]} before and after coalescing respectively.
 
