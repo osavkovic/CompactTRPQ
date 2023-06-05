@@ -4,5 +4,5 @@ This folder contains the supplementary material for our CIKM 2023 paper submissi
 
 In particular, 
 
-* Appendix.pdf contains all proofs and complete induction definitions for all four compact representation
-* File that contais SQL queries used in the experiments 
+* Appendix.pdf contains all proofs and complete induction definitions for all four compact representation.
+* Code folder conatins SQL queries used in the experiments and the instructions on how to run the queries.
