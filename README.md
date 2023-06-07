@@ -4,5 +4,5 @@ This folder contains the supplementary material for our CIKM 2023 long paper sub
 
 In particular, 
 
-* **appendix.pdf** contains all proofs and complete inductive definitions for all four representations.
+* **appendix.pdf** contains all proofs and complete inductive definitions for the four representations.
 * The folder '**code**' contains SQL queries used in the experiments and instructions on how to run the queries.
