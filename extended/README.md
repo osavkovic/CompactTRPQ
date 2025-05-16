@@ -1,4 +1,6 @@
-Currently, the LaTeX template used in this extended version is not the LLNCS template used for the submitted paper.
+# Extended Version
+
+Currently, the LaTeX template used in this [extended version](./extended.pdf) is not the LLNCS template used for the submitted paper.
 The reason is that this is a previous version of the paper, submitted last year to another conference (and rejected).
 
 We have updated the introduction as well as the figures, and have used a slightly different notation in some places.
