@@ -4,4 +4,4 @@ This folder contains the material for reproducing our experiments for RuleML 202
 
 The material needed to reproduce the compactness experiments is in the folder [`experiments`](./experiments/README.md).
 
-The material needed to reproduce the runtime experiments is in the folder [`experiments`](./runtime/README.md).
+The material needed to reproduce the runtime experiments is in the folder [`runtime`](./runtime/README.md).
