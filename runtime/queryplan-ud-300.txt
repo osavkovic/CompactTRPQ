@@ -1,0 +1,50 @@
+                                                                      QUERY PLAN                                                                       
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on t3  (cost=10184825615.99..11468476353.31 rows=1271560 width=20) (actual rows=34220980 loops=1)
+   Filter: (t3.cs = t3.ce)
+   Rows Removed by Filter: 34220980
+   CTE t0
+     ->  Merge Join  (cost=289575375.39..3317232750.39 rows=12747466400 width=20) (actual rows=378602780 loops=1)
+           Merge Cond: (a.o2 = b.o1)
+           Join Filter: ((b.t >= (a.t + a.ds)) AND (b.t <= (a.t + a.de)))
+           Rows Removed by Join Filter: 255350945
+           ->  Sort  (cost=309394.78..310481.78 rows=434800 width=20) (actual rows=228100 loops=1)
+                 Sort Key: a.o2
+                 Sort Method: quicksort  Memory: 23870kB
+                 ->  Subquery Scan on a  (cost=232616.49..268675.78 rows=434800 width=20) (actual rows=228100 loops=1)
+                       ->  HashAggregate  (cost=232616.49..264327.78 rows=434800 width=20) (actual rows=228100 loops=1)
+                             Group Key: node_big.id, node_big.id, t.t, '-300'::integer, 0
+                             Planned Partitions: 4  Batches: 5  Memory Usage: 28721kB  Disk Usage: 1640kB
+                             ->  Nested Loop  (cost=0.02..47275.87 rows=2335000 width=20) (actual rows=231330 loops=1)
+                                   ->  Seq Scan on node_big  (cost=0.00..575.85 rows=2335 width=12) (actual rows=2336 loops=1)
+                                         Filter: (((type)::text = 'person'::text) AND ((prop1)::text = 'pos'::text))
+                                         Rows Removed by Filter: 22654
+                                   ->  Function Scan on generate_series t  (cost=0.02..10.02 rows=1000 width=4) (actual rows=99 loops=2336)
+           ->  Materialize  (cost=289265980.61..289529842.61 rows=52772400 width=20) (actual rows=658918101 loops=1)
+                 ->  Sort  (cost=289265980.61..289397911.61 rows=52772400 width=20) (actual rows=27583861 loops=1)
+                       Sort Key: b.o1
+                       Sort Method: external merge  Disk: 810320kB
+                       ->  Subquery Scan on b  (cost=250791111.68..281414805.78 rows=52772400 width=20) (actual rows=27592860 loops=1)
+                             ->  HashAggregate  (cost=250791111.68..280887081.78 rows=52772400 width=20) (actual rows=27592860 loops=1)
+                                   Group Key: edge_big.src, edge_big.dst, t_1.t, 0, 0
+                                   Planned Partitions: 256  Batches: 257  Memory Usage: 30737kB  Disk Usage: 1293432kB
+                                   ->  Nested Loop  (cost=0.02..50515524.81 rows=2523157000 width=20) (actual rows=27600420 loops=1)
+                                         ->  Seq Scan on edge_big  (cost=0.00..52384.79 rows=2523157 width=16) (actual rows=2522840 loops=1)
+                                               Filter: ((label)::text = 'meets'::text)
+                                               Rows Removed by Filter: 115783
+                                         ->  Function Scan on generate_series t_1  (cost=0.02..10.02 rows=1000 width=4) (actual rows=11 loops=2522840)
+   ->  WindowAgg  (cost=6867592865.59..8148061524.58 rows=254311955 width=36) (actual rows=68441960 loops=1)
+         ->  Subquery Scan on t2  (cost=6867592865.59..8142339505.59 rows=254311955 width=32) (actual rows=68441960 loops=1)
+               Filter: ((t2.cs = t2.ce) OR (t2.ps = t2.pe))
+               Rows Removed by Filter: 688763600
+               ->  WindowAgg  (cost=6867592865.59..7759915513.59 rows=25494932800 width=52) (actual rows=757205560 loops=1)
+                     ->  Sort  (cost=6867592865.59..6931330197.59 rows=25494932800 width=24) (actual rows=757205560 loops=1)
+                           Sort Key: t0.o1, t0.o2, t0.d, t0.ts, (0)
+                           Sort Method: external merge  Disk: 25191120kB
+                           ->  Result  (cost=0.00..892322648.00 rows=25494932800 width=24) (actual rows=757205560 loops=1)
+                                 ->  Append  (cost=0.00..637373320.00 rows=25494932800 width=24) (actual rows=757205560 loops=1)
+                                       ->  CTE Scan on t0  (cost=0.00..254949328.00 rows=12747466400 width=24) (actual rows=378602780 loops=1)
+                                       ->  CTE Scan on t0 t0_1  (cost=0.00..254949328.00 rows=12747466400 width=24) (actual rows=378602780 loops=1)
+ Planning Time: 0.538 ms
+ Execution Time: 1390456.680 ms
+(47 rows)
